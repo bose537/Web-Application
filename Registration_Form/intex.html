@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Service Request</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .service-option {
+            transition: all 0.3s ease;
+        }
+        .service-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .service-option.active {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-6 px-8 text-white">
+                <h1 class="text-3xl font-bold">Service Request Form</h1>
+                <p class="text-blue-100 mt-1">Fill out the form below to request professional services</p>
+            </div>
+            
+            <!-- Progress Steps -->
+            <div class="px-8 pt-6">
+                <div class="flex items-center">
+                    <div class="flex-1 border-t-2 border-blue-500"></div>
+                    <div class="px-4 py-2 rounded-full bg-blue-600 text-white font-medium">1. Service Selection</div>
+                    <div class="flex-1 border-t-2 border-gray-300"></div>
+                    <div class="px-4 py-2 rounded-full bg-gray-300 text-gray-700 font-medium">2. Your Details</div>
+                    <div class="flex-1 border-t-2 border-gray-300"></div>
+                </div>
+            </div>
+            
+            <!-- Form -->
+            <form action="register.php" method="POST" class="p-8 space-y-6" id="serviceForm">
+                <!-- Step 1: Service Selection -->
+                <div id="step1">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Select Service Type</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Electrical Service Option -->
+                        <div class="service-option border-2 rounded-lg p-4 cursor-pointer" data-service="electrical">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-bolt text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Electrical Services</h3>
+                                    <p class="text-sm text-gray-500">Professional electrical solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Plumbing Service Option -->
+                        <div class="service-option border-2 rounded-lg p-4 cursor-pointer" data-service="plumbing">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <i class="fas fa-faucet text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Plumbing Services</h3>
+                                    <p class="text-sm text-gray-500">Expert plumbing solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Electrical Services Sub-options -->
+                    <div id="electricalServices" class="mt-6 hidden">
+                        <h3 class="text-lg font-medium text-gray-700 mb-3">Select Electrical Service</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="electrical_service" value="Wiring Installation" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Wiring Installation</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="electrical_service" value="Circuit Repair" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Circuit Repair</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="electrical_service" value="Lighting Installation" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Lighting Installation</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="electrical_service" value="Panel Upgrade" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Panel Upgrade</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="electrical_service" value="Other Electrical" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Other Electrical Service</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Plumbing Services Sub-options -->
+                    <div id="plumbingServices" class="mt-6 hidden">
+                        <h3 class="text-lg font-medium text-gray-700 mb-3">Select Plumbing Service</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="plumbing_service" value="Leak Repair" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Leak Repair</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="plumbing_service" value="Pipe Installation" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Pipe Installation</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="plumbing_service" value="Drain Cleaning" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Drain Cleaning</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="plumbing_service" value="Water Heater Service" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Water Heater Service</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg">
+                                <input type="radio" name="plumbing_service" value="Other Plumbing" class="h-4 w-4 text-blue-600">
+                                <span class="text-gray-700">Other Plumbing Service</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end mt-8">
+                        <button type="button" id="nextBtn" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50" disabled>
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Customer Details -->
+                <div id="step2" class="hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Contact Information</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" id="name" name="name" required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">Contact Number *</label>
+                            <input type="tel" id="contact" name="contact" required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   pattern="[0-9]{10}">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Service Address *</label>
+                            <textarea id="address" name="address" rows="3" required
+                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Service Description</label>
+                            <textarea id="description" name="description" rows="2"
+                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                      placeholder="Please describe your service needs in detail"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8">
+                        <button type="button" id="backBtn" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            Submit Request <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <input type="hidden" id="serviceType" name="service_type" value="">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Service type selection
+            const serviceOptions = document.querySelectorAll('.service-option');
+            const nextBtn = document.getElementById('nextBtn');
+            const serviceTypeInput = document.getElementById('serviceType');
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const backBtn = document.getElementById('backBtn');
+            
+            let selectedService = '';
+            
+            // Handle service selection
+            serviceOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    serviceOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to selected option
+                    this.classList.add('active');
+                    
+                    // Get selected service type
+                    selectedService = this.dataset.service;
+                    serviceTypeInput.value = selectedService;
+                    
+                    // Show relevant sub-options
+                    document.getElementById('electricalServices').classList.add('hidden');
+                    document.getElementById('plumbingServices').classList.add('hidden');
+                    
+                    if (selectedService === 'electrical') {
+                        document.getElementById('electricalServices').classList.remove('hidden');
+                    } else if (selectedService === 'plumbing') {
+                        document.getElementById('plumbingServices').classList.remove('hidden');
+                    }
+                    
+                    // Enable next button
+                    nextBtn.disabled = false;
+                });
+            });
+            
+            // Handle next button
+            nextBtn.addEventListener('click', function() {
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                
+                // Update progress steps UI
+                document.querySelectorAll('.flex div:nth-child(2)')[0].classList.remove('bg-blue-600');
+                document.querySelectorAll('.flex div:nth-child(2)')[0].classList.add('bg-gray-300', 'text-gray-700');
+                document.querySelectorAll('.flex div:nth-child(4)')[0].classList.remove('bg-gray-300', 'text-gray-700');
+                document.querySelectorAll('.flex div:nth-child(4)')[0].classList.add('bg-blue-600', 'text-white');
+                document.querySelectorAll('.flex div:nth-child(3)')[0].classList.remove('border-gray-300');
+                document.querySelectorAll('.flex div:nth-child(3)')[0].classList.add('border-blue-500');
+            });
+            
+            // Handle back button
+            backBtn.addEventListener('click', function() {
+                step2.classList.add('hidden');
+                step1.classList.remove('hidden');
+                
+                // Update progress steps UI
+                document.querySelectorAll('.flex div:nth-child(4)')[0].classList.remove('bg-blue-600', 'text-white');
+                document.querySelectorAll('.flex div:nth-child(4)')[0].classList.add('bg-gray-300', 'text-gray-700');
+                document.querySelectorAll('.flex div:nth-child(2)')[0].classList.remove('bg-gray-300', 'text-gray-700');
+                document.querySelectorAll('.flex div:nth-child(2)')[0].classList.add('bg-blue-600', 'text-white');
+                document.querySelectorAll('.flex div:nth-child(3)')[0].classList.add('border-gray-300');
+                document.querySelectorAll('.flex div:nth-child(3)')[0].classList.remove('border-blue-500');
+            });
+            
+            // Form validation before submission
+            const form = document.getElementById('serviceForm');
+            form.addEventListener('submit', function(e) {
+                // Additional validation can be added here if needed
+                // Form will submit to submit_request.php
+            });
+        });
+    </script>
+</body>
+</html>
